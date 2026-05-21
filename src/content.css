@@ -1,0 +1,520 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rai-floating-btn {
+  position: absolute;
+
+  right: 76px;
+  bottom: 3px;
+
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+
+  background:
+    linear-gradient(135deg,
+      #7c6af7,
+      #1d9bf0);
+
+  color: white;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 999;
+
+  box-shadow:
+    0 4px 10px rgba(124, 106, 247, 0.24);
+
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.rai-floating-btn:hover {
+  transform:
+    translateY(-1px) scale(1.04);
+
+  box-shadow:
+    0 8px 18px rgba(124, 106, 247, 0.34);
+}
+
+.rai-floating-btn:active {
+  transform: scale(0.94);
+}
+
+/* =========================================
+   FIX X TOOLBAR ALIGNMENT
+========================================= */
+
+[data-testid="toolBar"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+[data-testid="toolBar"]>div:last-child {
+  display: flex !important;
+  align-items: center !important;
+  flex-direction: row !important;
+
+  gap: 6px !important;
+}
+
+/* =========================================
+   Main Panel
+========================================= */
+
+#rai-panel {
+  position: fixed;
+
+  top: 50%;
+  right: 20px;
+
+  transform: translateY(-50%);
+
+  width: 380px;
+  max-width: calc(100vw - 30px);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #0d1117;
+
+  border-radius: 22px;
+
+  padding: 20px;
+
+  z-index: 999999;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(124, 106, 247, 0.08);
+
+  color: white;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  backdrop-filter: blur(20px);
+
+  animation: raiSlideIn 0.22s ease;
+}
+
+@keyframes raiSlideIn {
+  from {
+    opacity: 0;
+    transform:
+      translateY(-46%) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(-50%) scale(1);
+  }
+}
+
+/* =========================================
+   Scrollbar
+========================================= */
+
+#rai-panel::-webkit-scrollbar {
+  width: 5px;
+}
+
+#rai-panel::-webkit-scrollbar-thumb {
+  background: #1e2732;
+  border-radius: 10px;
+}
+
+/* =========================================
+   Header
+========================================= */
+
+#rai-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+#rai-header span {
+  font-size: 17px;
+  font-weight: 700;
+
+  background:
+    linear-gradient(135deg,
+      #a78bfa,
+      #38bdf8);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: -0.3px;
+}
+
+#rai-close {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #1a2030;
+
+  color: #8899aa;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+#rai-close:hover {
+  background: #252f40;
+  color: white;
+
+  transform: scale(1.05);
+}
+
+/* =========================================
+   Labels
+========================================= */
+
+.rai-label {
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+
+  color: #556677;
+
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+/* =========================================
+   Wrapper
+========================================= */
+
+.rai-box-wrap {
+  position: relative;
+}
+
+.rai-box-wrap button {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  z-index: 999;
+
+  background: #1a2535;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  color: #7890a8;
+
+  padding: 5px 10px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+}
+
+.rai-box-wrap button:hover {
+  background: #243040;
+  color: white;
+}
+
+/* =========================================
+   Content Boxes
+========================================= */
+
+#rai-author,
+#rai-post,
+#rai-result {
+  background: #111822;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.05);
+
+  border-radius: 16px;
+
+  padding: 14px;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+  color: #d2ddeb;
+
+  white-space: pre-wrap;
+
+  word-break: break-word;
+
+  overflow-y: auto;
+}
+
+#rai-author {
+  min-height: 44px;
+
+  color: #a78bfa;
+
+  font-weight: 600;
+}
+
+#rai-post {
+  min-height: 100px;
+  max-height: 200px;
+
+  border-left:
+    3px solid #7c6af7;
+}
+
+#rai-result {
+  min-height: 100px;
+  max-height: 220px;
+
+  border-left:
+    3px solid #1d9bf0;
+}
+
+/* =========================================
+   Textarea
+========================================= */
+
+#rai-myreply {
+  width: 100%;
+
+  min-height: 100px;
+
+  background: #111822;
+
+  color: #e0eaf4;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.05);
+
+  border-radius: 16px;
+
+  padding: 14px;
+
+  resize: vertical;
+
+  outline: none;
+
+  font-size: 13px;
+
+  line-height: 1.65;
+
+  font-family: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#rai-myreply:focus {
+  border-color:
+    rgba(124, 106, 247, 0.45);
+
+  box-shadow:
+    0 0 0 3px rgba(124, 106, 247, 0.08);
+}
+
+#rai-myreply::placeholder {
+  color: #445566;
+}
+
+/* =========================================
+   Tone Buttons
+========================================= */
+
+#rai-tones {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.rai-tone {
+  border:
+    1px solid rgba(255, 255, 255, 0.06) !important;
+
+  border-radius: 999px !important;
+
+  background: #111822 !important;
+
+  color: #7890a8 !important;
+
+  padding: 8px 14px !important;
+
+  cursor: pointer !important;
+
+  font-size: 12px !important;
+
+  font-family: inherit !important;
+
+  transition: all 0.15s ease;
+}
+
+.rai-tone:hover {
+  border-color: #7c6af7 !important;
+
+  color: #e8e8ff !important;
+}
+
+.rai-tone.selected {
+  background:
+    rgba(124, 106, 247, 0.14) !important;
+
+  border-color: #7c6af7 !important;
+
+  color: #b59cff !important;
+}
+
+/* =========================================
+   Buttons
+========================================= */
+
+#rai-generate,
+#rai-insert {
+  width: 100%;
+
+  border: none;
+
+  border-radius: 15px;
+
+  padding: 13px;
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  margin-top: 14px;
+
+  font-family: inherit;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Generate */
+
+#rai-generate {
+  background:
+    linear-gradient(135deg,
+      #7c6af7,
+      #a78bfa);
+
+  box-shadow:
+    0 6px 20px rgba(124, 106, 247, 0.32);
+}
+
+#rai-generate:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 28px rgba(124, 106, 247, 0.46);
+}
+
+#rai-generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Insert */
+
+#rai-insert {
+  background: #1d9bf0;
+
+  box-shadow:
+    0 6px 20px rgba(29, 155, 240, 0.28);
+}
+
+#rai-insert:hover {
+  background: #1a8cd8;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 28px rgba(29, 155, 240, 0.4);
+}
+
+/* =========================================
+   Generated Wrapper
+========================================= */
+
+.rai-generated-wrap {
+  padding-top: 24px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.05);
+
+  margin-top: 10px;
+}
+
+/* =========================================
+   Mobile Responsive
+========================================= */
+
+@media (max-width: 520px) {
+  #rai-panel {
+    width: calc(100vw - 20px);
+
+    right: 10px;
+
+    padding: 16px;
+  }
+
+  .rai-floating-btn {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+}

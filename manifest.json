@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "ReplyAI",
+  "version": "1.2.0",
+  "description": "AI-powered smart reply generator",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "src/sarvam.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.sarvam.ai/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*",
+        "https://youtube.com/*",
+        "https://www.linkedin.com/*",
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "src/content.js"
+      ],
+      "css": [
+        "src/content.css"
+      ]
+    }
+  ]
+}
