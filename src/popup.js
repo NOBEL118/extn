@@ -1,9 +1,6 @@
 const apiKeyInput =
   document.getElementById("apiKey");
 
-const modelSelect =
-  document.getElementById("model");
-
 const lengthSelect =
   document.getElementById("maxLength");
 
@@ -22,7 +19,6 @@ async function loadSettings() {
   const data =
     await chrome.storage.local.get([
       "sarvamApiKey",
-      "model",
       "maxLength"
     ]);
 
@@ -30,12 +26,6 @@ async function loadSettings() {
 
     apiKeyInput.value =
       data.sarvamApiKey;
-  }
-
-  if (data.model) {
-
-    modelSelect.value =
-      data.model;
   }
 
   if (data.maxLength) {
@@ -57,9 +47,6 @@ saveBtn.addEventListener(
     const apiKey =
       apiKeyInput.value.trim();
 
-    const model =
-      modelSelect.value;
-
     const maxLength =
       lengthSelect.value;
 
@@ -67,8 +54,6 @@ saveBtn.addEventListener(
 
       sarvamApiKey:
         apiKey,
-
-      model,
 
       maxLength
     });

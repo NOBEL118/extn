@@ -52,14 +52,11 @@ async function handleGenerate({
   // --------------------------------
   // Get saved settings
   // --------------------------------
-
   const {
     sarvamApiKey,
-    model,
     maxLength
   } = await chrome.storage.local.get([
     "sarvamApiKey",
-    "model",
     "maxLength"
   ]);
 
@@ -92,7 +89,7 @@ async function handleGenerate({
     long:
       "a detailed paragraph",
 
-  }[maxLength || "medium"];
+  }[maxLength || "short"];
 
   // --------------------------------
   // Build context
@@ -168,7 +165,6 @@ Generate the reply now.
   // --------------------------------
   // API Call
   // --------------------------------
-
   const response = await fetch(
     "https://api.sarvam.ai/v1/chat/completions",
     {
@@ -184,8 +180,7 @@ Generate the reply now.
 
       body: JSON.stringify({
 
-        model:
-          model || "sarvam-m",
+        model: "sarvam-105b",
 
         messages: [
 
@@ -203,9 +198,11 @@ Generate the reply now.
           }
         ],
 
-        max_tokens: 400,
+        reasoning_effort: null,
 
-        temperature: 0.82,
+        max_tokens: 500,
+
+        temperature: 0.1,
       }),
     }
   );
@@ -236,6 +233,7 @@ Generate the reply now.
   const data =
     await response.json();
 
+  console.log(data)
   let text =
     data?.choices?.[0]
       ?.message?.content

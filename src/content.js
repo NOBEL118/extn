@@ -484,7 +484,6 @@ function addAIButton(box) {
         : "Write a natural engaging reply";
 
       try {
-
         const response =
           await chrome.runtime.sendMessage({
 
