@@ -42,7 +42,7 @@
     <div class="card">
 
       <label>
-        Sarvam API Key
+        Groq API Key
       </label>
 
       <input
@@ -56,9 +56,13 @@
       </label>
 
           <select id="model">
-            
-            <option value="sarvam-l">
-              Sarvam 105B
+        
+            <option value="openai/gpt-oss-120b">
+              OpenAI GPT-OSS 120B
+            </option>
+
+            <option value="openai/gpt-oss-20b">
+              OpenAI GPT-OSS 20B
             </option>
 
           </select>
@@ -92,13 +96,14 @@
 
     </div>
 
-    <div class="footer">
-
-      Your API key stays locally
-      in Chrome storage.
-
+   <div class="footer">
+    <p>Your API key stays locally in Chrome storage.</p>
+    <div class="footer-links">
+      <a id="rai-help-link" href="#" target="_blank" rel="noopener noreferrer">Need help? Ask ChatGPT</a>
+      <span class="dot">•</span>
+      <a href="https://x.com/nobelxenon" target="_blank" rel="noopener noreferrer">Built by @nobelxenon</a>
     </div>
-
+  </div>
   </div>
 
   <script src="src/popup.js"></script>

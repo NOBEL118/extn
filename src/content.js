@@ -362,6 +362,10 @@ function addAIButton(box) {
             Clear
           </button>
 
+          <button id="rai-copy-generated">
+            Copy
+          </button>
+
         </div>
 
         <button id="rai-insert">
@@ -454,9 +458,39 @@ function addAIButton(box) {
     };
 
     // -----------------------------------
+    // Copy reply
+    // -----------------------------------
+
+    const copyBtn = panel.querySelector("#rai-copy-generated");
+
+    copyBtn.addEventListener("click", async () => {
+      const text = panel.querySelector("#rai-result").textContent.trim();
+      if (!text) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        // fallback for pages where the Clipboard API is blocked
+        const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          ta.remove();
+      }
+
+      const original = copyBtn.textContent;
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => (copyBtn.textContent = original), 1500);
+      });
+
+    // -----------------------------------
     // Generate reply
     // -----------------------------------
 
+    
     panel.querySelector(
       "#rai-generate"
     ).onclick = async () => {

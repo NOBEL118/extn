@@ -12,28 +12,18 @@ chrome.runtime.onMessage.addListener(
     if (message.type === "GENERATE_REPLY") {
 
       handleGenerate(message)
-
         .then(reply => {
-
-          sendResponse({
-            success: true,
-            reply
-          });
+          sendResponse({ success: true, reply });
         })
-
         .catch(err => {
-
-          sendResponse({
-            success: false,
-            error: err.message
-          });
+          console.error("Error generating reply:", err);
+          sendResponse({ success: false, error: err.message });
         });
 
       return true;
     }
   }
 );
-
 // --------------------------------
 // Main generation handler
 // --------------------------------
@@ -46,7 +36,6 @@ async function handleGenerate({
   tone,
   platform,
   platformRules,
-  charLimit
 }) {
 
   // --------------------------------
@@ -54,9 +43,11 @@ async function handleGenerate({
   // --------------------------------
   const {
     sarvamApiKey,
+    model,
     maxLength
   } = await chrome.storage.local.get([
     "sarvamApiKey",
+    "model",
     "maxLength"
   ]);
 
@@ -165,45 +156,32 @@ Generate the reply now.
   // --------------------------------
   // API Call
   // --------------------------------
+  const isGptOss = model.startsWith("openai/gpt-oss");
+
+  const body = {
+    model,
+    messages: [
+      { role: "system", content: "You output only the final reply text." },
+      { role: "user", content: prompt },
+    ],
+    temperature: 0.3,
+    max_completion_tokens: isGptOss ? 1024 : 500,
+  };
+
+  if (isGptOss) {
+    body.reasoning_effort = "low";
+    body.include_reasoning = false;
+  }
+
   const response = await fetch(
-    "https://api.sarvam.ai/v1/chat/completions",
+    "https://api.groq.com/openai/v1/chat/completions",
     {
       method: "POST",
-
       headers: {
-        "Content-Type":
-          "application/json",
-
-        "api-subscription-key":
-          finalApiKey,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${finalApiKey}`,
       },
-
-      body: JSON.stringify({
-
-        model: "sarvam-105b",
-
-        messages: [
-
-          {
-            role: "system",
-
-            content:
-              "You output only the final reply text."
-          },
-
-          {
-            role: "user",
-
-            content: prompt
-          }
-        ],
-
-        reasoning_effort: null,
-
-        max_tokens: 500,
-
-        temperature: 0.1,
-      }),
+      body: JSON.stringify(body),
     }
   );
 
